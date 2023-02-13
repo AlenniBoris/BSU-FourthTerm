@@ -6,35 +6,38 @@ import java.util.stream.Collectors;
 
 public class Task69_2 {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
-        int size = Integer.parseInt(sc.nextLine());
+        int n = Integer.parseInt(sc.nextLine());
         ArrayList<Integer> mosquitoes = new ArrayList<>();
         for(String el : sc.nextLine().split(" ")){
             mosquitoes.add(Integer.parseInt(el));
         }
 
-        int sum = 0;
-        String resString;
+        int sum = mosquitoes.get(0);
         ArrayList<Integer> indexes = new ArrayList<>();
 
-        if (mosquitoes.size() % 2 == 0){
-            for (int i = 0; i < mosquitoes.size(); i += 2) {
-                sum += mosquitoes.get(i);
+        for (int i = 2; i <= n;) {
+            sum += mosquitoes.get(i);
+            if (mosquitoes.get(i+2) > mosquitoes.get(i+3)){
                 indexes.add(i);
+                i += 2;
+            }else if (mosquitoes.get(i+2) < mosquitoes.get(i+3)){
+                indexes.add(i);
+                i += 3;
             }
         }
-        else if (mosquitoes.size() % 3 == 0){
-            for (int i = 0; i < mosquitoes.size(); i += 3) {
-                sum += mosquitoes.get(i);
-                indexes.add(i);
-            }
+
+        if (n == 2){
+            sum = -1;
+            indexes.clear();
         }
-        else
-            resString = "-1";
 
-        resString = String.valueOf(sum);
+        if (n == 1){
+            indexes.add(0);
+        }
 
-        System.out.println(resString);
-        System.out.println(indexes.toString().substring(1,indexes.size()-2).replaceAll(",", " "));
+        System.out.println(sum);
+        System.out.println(indexes.toString().replaceAll("," , " ").replaceAll("[^0-9 ]", ""));
     }
 }
