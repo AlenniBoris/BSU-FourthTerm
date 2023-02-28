@@ -1,3 +1,5 @@
+package Strukturi;
+
 import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
