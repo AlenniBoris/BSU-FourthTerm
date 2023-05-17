@@ -1,0 +1,14 @@
+﻿  Integral.cpp
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(72,42): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(77,50): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(81,50): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(86,35): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(86,47): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(97,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(102,47): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(106,47): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(111,29): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(111,41): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(61,12): warning C4101: 'f': unreferenced local variable
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\Integral\Integral.cpp(62,12): warning C4101: 'g': unreferenced local variable
+  Integral.vcxproj -> C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab3\Lab3\x64\Debug\Integral.exe

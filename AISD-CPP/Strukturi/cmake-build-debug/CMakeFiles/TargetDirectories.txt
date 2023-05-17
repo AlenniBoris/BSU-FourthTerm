@@ -1,0 +1,3 @@
+C:/MyProgramming/For-BSU/BSU-FourthTerm/AISD-CPP/Strukturi/cmake-build-debug/CMakeFiles/Strukturi.dir
+C:/MyProgramming/For-BSU/BSU-FourthTerm/AISD-CPP/Strukturi/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/MyProgramming/For-BSU/BSU-FourthTerm/AISD-CPP/Strukturi/cmake-build-debug/CMakeFiles/rebuild_cache.dir

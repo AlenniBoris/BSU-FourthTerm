@@ -1,0 +1,5 @@
+﻿  Lab1Part1.cpp
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part1\Lab1Part1\Lab1Part1\Lab1Part1.cpp(8,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part1\Lab1Part1\Lab1Part1\Lab1Part1.cpp(20,22): warning C4101: 'tempThird': unreferenced local variable
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part1\Lab1Part1\Lab1Part1\Lab1Part1.cpp(20,12): warning C4101: 'third': unreferenced local variable
+  Lab1Part1.vcxproj -> C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part1\Lab1Part1\x64\Debug\Lab1Part1.exe

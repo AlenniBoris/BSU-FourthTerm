@@ -1,0 +1,13 @@
+# ninja log v5
+2	1289	7002603415898068	CMakeFiles/Strukturi.dir/Task0_3.cpp.obj	b09482c8669e311a
+1837	2286	7011317288443523	Strukturi.exe	cc57d268a1290732
+0	130	7011317705297144	build.ninja	1768bca86329fea6
+1	1835	7011317283853519	CMakeFiles/Strukturi.dir/task19.cpp.obj	a8ffd4bc9dda1b35
+4	2124	7011319289757037	CMakeFiles/Strukturi.dir/task19.cpp.obj	a8ffd4bc9dda1b35
+2124	2352	7011319291557034	Strukturi.exe	cc57d268a1290732
+2	1208	7011319972388098	CMakeFiles/Strukturi.dir/task19.cpp.obj	a8ffd4bc9dda1b35
+1209	1652	7011319976478103	Strukturi.exe	cc57d268a1290732
+2	800	7011320974968728	CMakeFiles/Strukturi.dir/task19.cpp.obj	a8ffd4bc9dda1b35
+802	871	7011320975648694	Strukturi.exe	cc57d268a1290732
+3	546	7011323770849241	CMakeFiles/Strukturi.dir/task19.cpp.obj	a8ffd4bc9dda1b35
+546	616	7011323771528745	Strukturi.exe	cc57d268a1290732

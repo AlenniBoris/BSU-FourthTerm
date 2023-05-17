@@ -1,0 +1,7 @@
+﻿  ConsoleApplication1.cpp
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part2\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(6,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part2\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(93,19): warning C4154: deletion of an array expression; conversion to pointer supplied
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part2\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(94,20): warning C4154: deletion of an array expression; conversion to pointer supplied
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part2\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(95,19): warning C4154: deletion of an array expression; conversion to pointer supplied
+C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part2\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(97,5): warning C4551: function call missing argument list
+  ConsoleApplication1.vcxproj -> C:\MyProgramming\For-BSU\BSU-FourthTerm\ComputerArchitecture\Lab1\Part2\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe
