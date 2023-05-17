@@ -1,66 +1,56 @@
 package Rekkurentnie;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.Scanner;
 
-public class Task6 {
+public class Task6 implements Runnable{
+    static void getLength(int[] array, PrintStream out, int n){
+        int[] f = new int[n + 1];
 
-    static int[] fillArray(Scanner sc, int n){
-        int[] array = new int[n];
-        String[] a = sc.nextLine().split(" ");
-        for (int i = 0; i < n; i++) {
-            array[i] = Integer.parseInt(a[i]);
-        }
-        return array;
-    }
+        int L = 0;
 
-    static int getLength(int[] array, int n){
-        if (array.length <= 1){
-            return 1;
-        }
-
-        int[] indexes = new int[n+1];
-
-        int left = 0;
-
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < array.length; i++) {
             int begin = 1;
-            int end = left;
+            int end = L;
             while(begin <= end){
-                int mid = (int)Math.ceil((double) (begin + end) /2);
-                if (array[indexes[mid]] < array[i]){
+                int mid = (int)Math.ceil((double) (begin+end)/2);
+                if (array[f[mid]] < array[i]){
                     begin = mid + 1;
                 }
-                else
-                    end = mid - 1;
+                else end = mid - 1;
             }
-
-            if (begin > left){
-                left = begin;
+            if (begin > L){
+                L = begin;
             }
-
-            indexes[begin] = i;
+            f[begin] = i;
         }
 
-        return left;
+        out.println(L);
+        out.close();
     }
 
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(new BufferedInputStream(new FileInputStream(new File("input.txt"))));
-        PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream(new File("output.txt"))));
+        new Thread(null, new Task6(), "", 64*1024).start();
+    }
 
+    @Override
+    public void run() {
+        try{
+            BufferedReader sc = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
+            PrintStream out = new PrintStream(new FileOutputStream(new File("output.txt")));
 
-        int n = Integer.parseInt(sc.nextLine());
-        int[] array = fillArray(sc, n);
+            int n = Integer.parseInt(sc.readLine());
 
-        out.println(getLength(array, n));
-        out.close();
+            int[] array = new int[n];
+            String[] numbers = sc.readLine().split(" ");
+            for (int i = 0; i < n; i++) {
+                array[i] = Integer.parseInt(numbers[i]);
+            }
+
+            sc.close();
+            getLength(array, out, n);
+        }catch (IOException e){
+            System.exit(-1000);
+        }
     }
 }

@@ -3,16 +3,6 @@ package Rekkurentnie;
 import java.util.Scanner;
 
 public class Task0_3 {
-    static long fact(long n){
-        long res = 1l;
-
-        for (int i = 0; i <= n; i++) {
-            res *= i;
-        }
-
-        return res;
-    }
-
     static long binpow (long a,long n) {
         if (n == 0)
             return 1;
@@ -28,11 +18,20 @@ public class Task0_3 {
 
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        long n = sc.nextLong();
-        long k = sc.nextLong();
+        int n = sc.nextInt();
+        int k = sc.nextInt();
 
-        System.out.println(
-                ((fact(n) % coef) * (binpow(fact(k)*fact(n-k), coef - 2) % coef)) % coef
-        );
+        long num = 1;
+        long den = 1;
+
+        for (int i = n; i > n - k; i--) {
+            num = (num * i)%coef;
+        }
+
+        for (int i = 1; i <= k ; i++) {
+            den = (den*i)%coef;
+        }
+
+        System.out.println( (num*binpow(den, coef - 2)) % coef);
     }
 }

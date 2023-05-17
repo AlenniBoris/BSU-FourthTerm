@@ -1,10 +1,10 @@
-package Strukturi;
+package Trees;
 
 import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Task0_1 {
+public class Task0_1Binary {
     static int getL(ArrayList<Integer> numbers,int number){
         int right = numbers.size(), left = 0;
         while(left < right){
