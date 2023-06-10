@@ -5,137 +5,251 @@ import java.util.*;
 
 public class Task_2 implements Runnable{
     static String[] str;
-    static int n,m,k, record;
-    static ArrayList<Integer> field, path;
+    static int n,m,k, record, startIndex, free;
+    static ArrayList<Integer> rooks, field, surrounded;
 
-    static ArrayList<ArrayList<Integer>> paths;
+    static ArrayList<ArrayList<Integer>> combinations;
 
-    static void fill(BufferedReader sc) throws IOException{
+    static void fill(BufferedReader sc, PrintStream out) throws IOException{
         str = sc.readLine().split(" ");
         n = Integer.parseInt(str[0]);
         m = Integer.parseInt(str[1]);
         k = Integer.parseInt(str[2]);
 
-        field = new ArrayList<>(n*m);
+        free = n*m - k;
+
+        if (free == 0){
+            out.println(1);
+            out.close();
+            System.exit(0);
+        }
+
+        field = new ArrayList<>();
         for (int i = 0; i < n*m; i++) {
             field.add(0);
         }
-
+        startIndex = 0;
         for (int i = 0; i < k; i++) {
             int temp = Integer.parseInt(sc.readLine());
+
+            if (startIndex == temp){
+                startIndex++;
+            }
+
             field.set(temp - 1, -1);
         }
 
-        record = Integer.MAX_VALUE;
+        lookForSurrounded(field);
 
-        path = new ArrayList<>();
+        record = 50;
 
-        paths = new ArrayList<>();
+        combinations = new ArrayList<>();
+
+        rooks = new ArrayList<>();
     }
 
-    static void getResult(){
-        findPaths(field, path, 0);
+    static void lookForSurrounded(ArrayList<Integer> field){
+        surrounded = new ArrayList<>();
+        for (int i = 0; i < n*m; i++) {
+            int tempFree = 0;
+            if (field.get(i) != -1){
+                tempFree = countFreeCells(field, i, false);
+            }
+            if (tempFree == 1){
+                surrounded.add(i);
+            }
+        }
+        for (int i = 0; i < surrounded.size(); i++) {
+            field.set(surrounded.get(i), -1);
+        }
+        free -= surrounded.size();
     }
 
-    static void printResult(PrintStream out){
-        out.println(paths.size());
-        for (ArrayList<Integer> integers : paths) {
-            for (int j = 0; j < integers.size(); j++) {
-                if (integers.get(j) == integers.get(integers.size() - 1)) {
-                    out.println(integers.get(j) + 1);
-                } else {
-                    out.print(integers.get(j) + " ");
+    static void tempPrint(){
+        System.out.println(field);
+        System.out.println(surrounded);
+        System.out.println("free cells = " + free);
+        System.out.println("record = " + record);
+        System.out.println("rooks = " + rooks);
+        System.out.println("combinations = " + combinations);
+        System.out.println();
+    }
+
+    static void printRes(PrintStream out){
+        if (combinations.isEmpty()){
+            out.println();
+            out.print(1);
+            for (int i = 0; i < surrounded.size(); i++) {
+                if (i == surrounded.size() - 1){
+                    out.print((surrounded.get(i) + 1));
+                }
+                else{
+                    out.print((surrounded.get(i) + 1) + " ");
+                }
+            }
+            System.exit(0);
+        }
+        if (!surrounded.isEmpty()){
+            for (int i = 0; i < combinations.size(); i++) {
+                for (int j = 0; j < surrounded.size(); j++) {
+                    combinations.get(i).add(surrounded.get(j));
+                }
+                Collections.sort(combinations.get(i));
+            }
+        }
+
+        out.println(combinations.size());
+        record += surrounded.size();
+        for (int i = 0; i < combinations.size(); i++) {
+            for (int j = 0; j < record; j++) {
+                if (j == record - 1){
+                    out.print((combinations.get(i).get(j) + 1));
+                }else{
+                    out.print((combinations.get(i).get(j) + 1) + " ");
                 }
             }
             out.println();
         }
     }
 
-    static void findPaths(ArrayList<Integer> field, ArrayList<Integer> path, int start){
+    static void getResult(){
+        findCombinations(field, rooks, startIndex, free);
+    }
+
+    static void findCombinations(ArrayList<Integer> field, ArrayList<Integer> rooks, int index, int freeCells){
         Queue<Integer> queue = new PriorityQueue<>();
-        for (int i = start; i < field.size(); i++) {
+        for (int i = index; i < field.size(); i++) {
             if (field.get(i) != -1){
-                queue.add(field.get(i));
+                queue.add(i);
             }
         }
-        while(!queue.isEmpty()){
-            int position = queue.remove();
-            path.add(position);
-            if (path.size() <= record){
-                ArrayList<Integer> temp = doVisits(field, position);
 
-                if (!temp.contains(0)){
-                    if (path.size() > record){
-                        path.remove(path.size() - 1);
-                    } else if (path.size() == record) {
-                        ArrayList<Integer> temp1 = new ArrayList<>(path);
-                        record = temp1.size();
-                        paths.add(temp1);
-                        path.remove(path.size() - 1);
-                    } else{
-                        paths.clear();
-                        ArrayList<Integer> temp1 = new ArrayList<>(path);
-                        record = temp1.size();
-                        paths.add(temp1);
-                        path.remove(path.size() - 1);
+        int countFree = 0;
+        int cf = freeCells;
+
+        while (!queue.isEmpty()){
+            freeCells = cf;
+
+            int pos = queue.remove();
+            rooks.add(pos);
+
+            if (rooks.size() <= record){
+                ArrayList<Integer> tempList = new ArrayList<>(field);
+
+                countFree = countFreeCells(tempList, pos, true);
+
+                if (countFree == 0){
+                    rooks.remove(rooks.size() - 1);
+                }else{
+                    freeCells -= countFree;
+
+                    if (freeCells != 0){
+                        if (rooks.size() == record){
+                            freeCells += countFree;
+                            rooks.remove(rooks.size() - 1);
+                        }else{
+                            if (!queue.isEmpty()){
+                                findCombinations(tempList, rooks, pos + 1, freeCells);
+                            }
+                            else{
+                                freeCells += countFree;
+                                rooks.remove(rooks.size() - 1);
+                            }
+                        }
                     }
-                }
-                else{
-                    findPaths(temp, path, position+1);
+                    else{
+                        if (rooks.size() < record){
+                            freeCells += countFree;
+                            combinations.clear();
+                            ArrayList<Integer> temp = new ArrayList<>(rooks);
+                            combinations.add(temp);
+                            record = temp.size();
+                            rooks.remove(rooks.size() - 1);
+                        }
+                        else if(rooks.size() == record){
+                            freeCells += countFree;
+                            ArrayList<Integer> temp = new ArrayList<>(rooks);
+                            combinations.add(temp);
+                            rooks.remove(rooks.size() - 1);
+                        }
+                        else{
+                            freeCells += record;
+                            rooks.remove(rooks.size() - 1);
+                        }
+                    }
+
                 }
             }
-            else {
-                path.remove(path.size() - 1);
+            else{
+                freeCells += countFree;
+                rooks.remove(rooks.size() - 1);
             }
-            path.remove(path.size() - 1);
         }
+        try{
+            freeCells = cf;
+            rooks.remove(rooks.size() - 1);
+        }catch (IndexOutOfBoundsException e){}
     }
 
-    static ArrayList<Integer> doVisits(ArrayList<Integer> list, int position){
-        ArrayList<Integer> result = new ArrayList<>(list);
+    static int countFreeCells(ArrayList<Integer> field, int index, boolean need){
+        ArrayList<Integer> countList = new ArrayList<>(field);
+        int numberFree = 0;
 
-        int index = position;
-        while((result.get(index) == 0 || result.get(index) == 1) && index >= 0){ //up
-            result.set(index, 1);//visited
-            index -= m;
-            if (index < 0){
+        for (int i = index; (countList.get(i) == 1 || countList.get(i) == 0);) { // down
+            if (countList.get(i) == 0){
+                numberFree++;
+            }
+            countList.set(i, 1);
+            i+= n;
+            if (i >= n*m){
                 break;
             }
         }
 
-        index = position;
-        while((result.get(index) == 0 || result.get(index) == 1) && index < n*m){ //down
-            result.set(index, 1);//visited
-            index += m;
-            if (index >= n*m){
+        for (int i = index; (countList.get(i) == 1 || countList.get(i) == 0);) { // up
+            if (countList.get(i) == 0){
+                numberFree++;
+            }
+            countList.set(i, 1);
+            i -= n;
+            if (i < 0){
                 break;
             }
         }
 
-        index = position;
-        while((result.get(index) == 0 || result.get(index) == 1)){ //left
-            if (index % n == 0){
-                result.set(index, 1);
-                break;
+        for (int i = index; (countList.get(i) == 1 || countList.get(i) == 0) ; ) {  // right
+            if (countList.get(i) == 0){
+                numberFree++;
             }
-            result.set(index, 1);//visited
-            --index;
-        }
-
-        index = position;
-        while((result.get(index) == 0 || result.get(index) == 1)){ //right
-            result.set(index, 1);//visited
-            ++index;
-            if (index % n == 0){
+            countList.set(i, 1);
+            i++;
+            if (i % m == 0){
                 break;
             }
         }
 
-        return result;
+        for (int i = index; (countList.get(i) == 1 || countList.get(i) == 0); ) { // left
+            if (i % m == 0){
+                if (countList.get(i) == 0){
+                    numberFree++;
+                }
+                countList.set(i, 1);
+                break;
+            }
+            if (countList.get(i) == 0){
+                numberFree++;
+            }
+            countList.set(i, 1);
+            i--;
+        }
+
+        if (need){
+            Collections.copy(field, countList);
+        }
+        return numberFree;
     }
-
     public static void main(String[] args) throws IOException{
-        new Thread(null,  new Task_2(), "task", 512*1024*1024).start();
+        new Thread(null,  new Task_2(), "task", 64*1024*1024).start();
     }
 
     @Override
@@ -144,12 +258,13 @@ public class Task_2 implements Runnable{
             BufferedReader sc = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
             PrintStream out = new PrintStream(new BufferedOutputStream(new FileOutputStream(new File("output.txt"))));
 
-            fill(sc);
+            fill(sc, out);
             sc.close();
 
             getResult();
 
-            printResult(out);
+            printRes(out);
+
             out.close();
         }
         catch (IOException e){
